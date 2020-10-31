@@ -2,28 +2,44 @@ import React, { useState } from 'react'
 import { Cell } from './cell.js'
 import style from '../styles.module.css'
 
-function Board() {
-    let [moves, setMoves] = useState(0xb00000000);
-    let [isMyTurn, setIsMuTurn] = useState(false);
-    
+function Board(props) {
+    let [myMoves, setMyMoves] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    let [rivalMoves, setRivalMoves] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    let [isMyTurn, setIsMyTurn] = useState(false);
+
+    function handleCellClick(id, isMarked, setIsMarked) {
+
+
+        if (isMyTurn) {
+            alert('No es tu turno');
+            return
+        }
+        myMoves[id] = 1;
+        let newMoves = [1, 1, 1, 1, 1, 1, 1, 1, 1] && myMoves
+        setMyMoves(newMoves)
+        console.log(myMoves);
+        setIsMyTurn(!isMyTurn)
+        setIsMarked(!isMarked)
+    }
+
     return (
-            <div>
-                <div className={style.row}>
-                    <Cell id='0'></Cell>
-                    <Cell id='1'></Cell>
-                    <Cell id='2'></Cell>
-                </div>
-                <div className={style.row}>
-                    <Cell id='3'></Cell>
-                    <Cell id='4'></Cell>
-                    <Cell id='5'></Cell>
-                </div>
-                <div className={style.row}>
-                    <Cell id='6'></Cell>
-                    <Cell id='7'></Cell>
-                    <Cell id='8'></Cell>
-                </div>
+        <div hidden={props.hidden}>
+            <div className={style.row}>
+                <Cell id='0' onClick={handleCellClick}></Cell>
+                <Cell id='1' onClick={handleCellClick}></Cell>
+                <Cell id='2' onClick={handleCellClick}></Cell>
             </div>
+            <div className={style.row}>
+                <Cell id='3' onClick={handleCellClick}></Cell>
+                <Cell id='4' onClick={handleCellClick}></Cell>
+                <Cell id='5' onClick={handleCellClick}></Cell>
+            </div>
+            <div className={style.row}>
+                <Cell id='6' onClick={handleCellClick}></Cell>
+                <Cell id='7' onClick={handleCellClick}></Cell>
+                <Cell id='8' onClick={handleCellClick}></Cell>
+            </div>
+        </div>
     );
 }
 export { Board }

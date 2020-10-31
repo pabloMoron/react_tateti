@@ -16,7 +16,10 @@ function dispatchProps(player) {
 
 const initialState={
     currentPlayer: '',
-    currentMark: 'X'
+    currentRival: '',
+    
+    currentMark: 'X',
+    currentRivalMark: 'O'
 }
 
 
@@ -24,7 +27,10 @@ function propsReducer(state, action) {
 
     return Object.assign({}, state=initialState, {
         currentPlayer: (action.player !== undefined)? action.player : state.currentPlayer,
-        currentMark: (action.mark !== undefined)? action.mark : state.currentMark
+        currentRival: (action.rival !== undefined)? action.rival : state.currentRival,
+        
+        currentMark: (action.mark !== undefined)? action.mark : state.currentMark,
+        currentRival: (action.rivalMark!==undefined)? action.rivalMark : state.currentRivalMark
     })
 }
 
